@@ -1,0 +1,31 @@
+---
+// index.astro — Main landing page composing all sections
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Catalog from '../components/Catalog.astro';
+import Features from '../components/Features.astro';
+import Reviews from '../components/Reviews.astro';
+import FAQ from '../components/FAQ.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Домики — картонные домики для детского творчества">
+  <Header />
+  <main>
+    <Hero />
+    <Catalog />
+    <Features />
+    <Reviews />
+    <FAQ />
+    <Contact />
+  </main>
+  <Footer />
+
+  <!-- Main client-side scripts -->
+  <script>
+    import '../scripts/main.ts';
+  </script>
+</Layout>

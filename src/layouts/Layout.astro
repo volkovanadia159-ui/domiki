@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Картонные домики для детского творчества — собери, раскрась и играй! Экологичные наборы из гофрокартона.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+    <meta name="theme-color" content="#E85D2A" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Яндекс.Метрика (заглушка — замените XXXXXXXX на реальный ID) -->
+    <script is:inline>
+      // (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      // m[i].l=1*new Date();
+      // for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      // k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      // (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      // ym(XXXXXXXX, "init", {
+      //   clickmap:true,
+      //   trackLinks:true,
+      //   accurateTrackBounce:true,
+      //   webvisor:true
+      // });
+      window.ym = window.ym || function() { (window.ym.a = window.ym.a || []).push(arguments); };
+    </script>
+  </body>
+</html>

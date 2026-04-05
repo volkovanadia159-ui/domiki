@@ -1,0 +1,244 @@
+---
+// ProductCard.astro — Individual product card for the catalog grid
+// Props match the shape of each entry in products.json
+
+interface Props {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  sizes: string;
+  includes: string;
+  image: string;
+  video360: string;
+}
+
+const { id, name, price, description, sizes, includes, image, video360 } = Astro.props;
+
+// Unique placeholder color per product id
+const PLACEHOLDER_COLORS: Record<string, { base: string; light: string; dark: string }> = {
+  forest:     { base: '#4CAF50', light: '#81C784', dark: '#2E7D32' },
+  castle:     { base: '#9C27B0', light: '#CE93D8', dark: '#6A1B9A' },
+  rocket:     { base: '#E53935', light: '#EF9A9A', dark: '#B71C1C' },
+  lighthouse: { base: '#2196F3', light: '#90CAF9', dark: '#0D47A1' },
+  bakery:     { base: '#FF9800', light: '#FFCC80', dark: '#E65100' },
+  farm:       { base: '#8BC34A', light: '#C5E1A5', dark: '#558B2F' },
+};
+
+const colors = PLACEHOLDER_COLORS[id] ?? { base: '#90A4AE', light: '#CFD8DC', dark: '#546E7A' };
+
+// Format price with thousands separator and ₽ symbol
+const formattedPrice = price.toLocaleString('ru-RU') + '\u00A0₽';
+
+// Inline SVG placeholder as a data URI (unique gradient per product)
+// We build it as a server-side string so there is zero runtime JS needed for the image
+const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="g-${id}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${colors.light}"/>
+      <stop offset="50%" stop-color="${colors.base}"/>
+      <stop offset="100%" stop-color="${colors.dark}"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#g-${id})"/>
+  <!-- Decorative house silhouette -->
+  <polygon points="200,60 110,145 290,145" fill="rgba(255,255,255,0.18)"/>
+  <rect x="130" y="145" width="140" height="95" fill="rgba(255,255,255,0.13)"/>
+  <rect x="175" y="178" width="50" height="62" fill="rgba(255,255,255,0.2)"/>
+  <!-- Window left -->
+  <rect x="143" y="160" width="28" height="24" rx="4" fill="rgba(255,255,255,0.22)"/>
+  <!-- Window right -->
+  <rect x="229" y="160" width="28" height="24" rx="4" fill="rgba(255,255,255,0.22)"/>
+  <!-- Ground line -->
+  <rect x="0" y="240" width="400" height="60" fill="rgba(0,0,0,0.08)"/>
+</svg>`;
+
+const svgDataUri = `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
+---
+
+<article class="product-card" data-product-id={id}>
+  <!-- ── Image / placeholder area ──────────────────────────────────────── -->
+  <div
+    class="card-image-wrap"
+    data-video360={video360}
+    aria-label={`Фото товара: ${name}`}
+  >
+    <img
+      class="card-image"
+      src={svgDataUri}
+      alt={name}
+      width="400"
+      height="300"
+      loading="lazy"
+      decoding="async"
+    />
+    <!-- 360° badge shown when video360 is present -->
+    <span class="badge-360" aria-hidden="true">360°</span>
+  </div>
+
+  <!-- ── Card body ─────────────────────────────────────────────────────── -->
+  <div class="card-body">
+    <h3 class="card-name">{name}</h3>
+    <p class="card-price">{formattedPrice}</p>
+    <p class="card-description">{description}</p>
+
+    <dl class="card-meta">
+      <div class="card-meta-row">
+        <dt>Размер</dt>
+        <dd>{sizes}</dd>
+      </div>
+      <div class="card-meta-row">
+        <dt>В комплекте</dt>
+        <dd>{includes}</dd>
+      </div>
+    </dl>
+
+    <button
+      class="btn btn-primary card-btn-cart"
+      data-product-id={id}
+      aria-label={`Добавить «${name}» в корзину`}
+      type="button"
+    >
+      В корзину
+    </button>
+  </div>
+</article>
+
+<style>
+  /* ===== Card wrapper ===== */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ===== Image area ===== */
+  .card-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+    flex-shrink: 0;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover .card-image {
+    transform: scale(1.04);
+  }
+
+  /* 360° badge */
+  .badge-360 {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ===== Card body ===== */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 20px 24px;
+    gap: 10px;
+  }
+
+  /* ===== Name ===== */
+  .card-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  /* ===== Price ===== */
+  .card-price {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* ===== Description ===== */
+  .card-description {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-text-light);
+    margin: 0;
+    flex: 1;
+  }
+
+  /* ===== Meta (sizes / includes) ===== */
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: 12px;
+  }
+
+  .card-meta-row {
+    display: flex;
+    gap: 6px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .card-meta-row dt {
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-meta-row dt::after {
+    content: ':';
+  }
+
+  .card-meta-row dd {
+    color: var(--color-text-light);
+    margin: 0;
+  }
+
+  /* ===== Add-to-cart button ===== */
+  .card-btn-cart {
+    margin-top: 4px;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+</style>

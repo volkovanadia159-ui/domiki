@@ -1,0 +1,360 @@
+---
+// Contact.astro — Lead capture form + social links (Telegram, VK, email)
+---
+
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="contact-wrapper animate-on-scroll">
+      <div class="contact-info">
+        <h2 class="contact-title">Остались вопросы?</h2>
+        <p class="contact-subtitle">
+          Напишите нам — поможем выбрать домик, расскажем о&nbsp;доставке
+          или оформим заказ.
+        </p>
+
+        <div class="contact-socials">
+          <a
+            href="https://t.me/domiki"
+            class="social-link social-tg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Написать в Telegram"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            <span>Telegram</span>
+          </a>
+
+          <a
+            href="https://vk.com/domiki"
+            class="social-link social-vk"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Написать в ВКонтакте"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.12-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.27-1.422 2.18-3.625 2.18-3.625.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/>
+            </svg>
+            <span>ВКонтакте</span>
+          </a>
+
+          <a
+            href="mailto:hello@domiki.ru"
+            class="social-link social-email"
+            aria-label="Написать на email"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M22 7l-10 7L2 7"/>
+            </svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+
+      <form
+        class="contact-form"
+        id="contact-form"
+        method="POST"
+        action="#"
+        novalidate
+      >
+        <h3 class="form-title">Оставьте заявку</h3>
+
+        <!-- Honeypot -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="website">Не заполняйте</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-field">
+          <label for="contact-name" class="form-label">Имя</label>
+          <input
+            type="text"
+            id="contact-name"
+            name="name"
+            class="form-input"
+            placeholder="Ваше имя"
+            required
+            autocomplete="given-name"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="contact-phone" class="form-label">Телефон или email</label>
+          <input
+            type="text"
+            id="contact-phone"
+            name="contact"
+            class="form-input"
+            placeholder="+7 (___) ___-__-__ или email"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="contact-message" class="form-label">Сообщение <span class="form-optional">(необязательно)</span></label>
+          <textarea
+            id="contact-message"
+            name="message"
+            class="form-input form-textarea"
+            placeholder="Что вас интересует?"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-consent">
+          <label class="consent-label">
+            <input type="checkbox" name="consent" required class="consent-checkbox" />
+            <span class="consent-text">
+              Соглашаюсь с <a href="#" target="_blank">политикой конфиденциальности</a>
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">
+          Отправить заявку
+        </button>
+
+        <p class="form-status" id="form-status" aria-live="polite" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    background: var(--color-bg);
+  }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ===== Info side ===== */
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 16px;
+  }
+
+  .contact-subtitle {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-light);
+    margin-bottom: 32px;
+  }
+
+  .contact-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all var(--transition);
+    text-decoration: none;
+  }
+
+  .social-tg {
+    background: #E3F2FD;
+    color: #0088cc;
+  }
+
+  .social-tg:hover {
+    background: #0088cc;
+    color: #fff;
+  }
+
+  .social-vk {
+    background: #E8EAF6;
+    color: #4A76A8;
+  }
+
+  .social-vk:hover {
+    background: #4A76A8;
+    color: #fff;
+  }
+
+  .social-email {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+  }
+
+  .social-email:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  /* ===== Form ===== */
+  .contact-form {
+    background: var(--color-bg-alt);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-title {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .form-optional {
+    font-weight: 400;
+    color: var(--color-text-light);
+  }
+
+  .form-input {
+    padding: 12px 16px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(232, 93, 42, 0.12);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-light);
+    opacity: 0.7;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  /* ===== Consent ===== */
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .consent-checkbox {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    accent-color: var(--color-primary);
+  }
+
+  .consent-text {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+
+  .consent-text a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ===== Submit ===== */
+  .form-submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .form-status {
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  .form-status.success {
+    color: var(--color-success);
+  }
+
+  .form-status.error {
+    color: var(--color-error);
+  }
+
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .contact-form {
+      padding: 24px 20px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status') as HTMLParagraphElement | null;
+    if (!form || !status) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Honeypot check
+      const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+      if (honeypot && honeypot.value) return;
+
+      // Basic validation
+      const name = form.querySelector<HTMLInputElement>('input[name="name"]');
+      const contact = form.querySelector<HTMLInputElement>('input[name="contact"]');
+      const consent = form.querySelector<HTMLInputElement>('input[name="consent"]');
+
+      if (!name?.value.trim() || !contact?.value.trim()) {
+        status.textContent = 'Пожалуйста, заполните обязательные поля.';
+        status.className = 'form-status error';
+        status.hidden = false;
+        return;
+      }
+
+      if (!consent?.checked) {
+        status.textContent = 'Необходимо согласие с политикой конфиденциальности.';
+        status.className = 'form-status error';
+        status.hidden = false;
+        return;
+      }
+
+      // TODO: Replace with actual server endpoint (POST)
+      status.textContent = 'Спасибо! Мы свяжемся с вами в ближайшее время.';
+      status.className = 'form-status success';
+      status.hidden = false;
+      form.reset();
+    });
+  })();
+</script>

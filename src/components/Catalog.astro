@@ -1,0 +1,88 @@
+---
+// Catalog.astro — Full catalog section that renders all products from products.json
+import ProductCard from './ProductCard.astro';
+import products from '../data/products.json';
+---
+
+<section id="catalog" class="section catalog-section">
+  <div class="container">
+    <h2 class="section-title catalog-title">
+      Наша <span>коллекция</span>
+    </h2>
+
+    <div class="catalog-grid">
+      {products.map((product) => (
+        <div class="catalog-card-wrap animate-on-scroll">
+          <ProductCard
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            description={product.description}
+            sizes={product.sizes}
+            includes={product.includes}
+            image={product.image}
+            video360={product.video360}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Section background ===== */
+  .catalog-section {
+    background: var(--color-bg-alt);
+  }
+
+  /* ===== Title ===== */
+  .catalog-title {
+    font-family: var(--font-display);
+  }
+
+  /* ===== Responsive grid ===== */
+  .catalog-grid {
+    display: grid;
+    gap: 28px;
+
+    /* Mobile-first: single column */
+    grid-template-columns: 1fr;
+  }
+
+  /* Tablet: 2 columns */
+  @media (min-width: 600px) {
+    .catalog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop: 3 columns */
+  @media (min-width: 1024px) {
+    .catalog-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+  }
+
+  /* ===== Card wrapper (carries animate-on-scroll) ===== */
+  .catalog-card-wrap {
+    /* Let the card fill its grid cell completely */
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Make the ProductCard article stretch to fill the wrapper height
+     so all cards in the same row are the same height */
+  .catalog-card-wrap :global(.product-card) {
+    flex: 1;
+  }
+
+  /* ===== Stagger the scroll-reveal animation per card ===== */
+  .catalog-card-wrap:nth-child(3n + 2) {
+    transition-delay: 0.1s;
+  }
+
+  .catalog-card-wrap:nth-child(3n + 3) {
+    transition-delay: 0.2s;
+  }
+</style>

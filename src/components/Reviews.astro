@@ -1,0 +1,163 @@
+---
+// Reviews.astro — Customer testimonials section
+const reviews = [
+  {
+    name: 'Анна М.',
+    city: 'Москва',
+    text: 'Заказала «Замок» сыну на 5 лет — он был в восторге! Собирали вместе, потом раскрашивали красками. Играет уже третью неделю, конструкция крепкая.',
+    rating: 5,
+    product: 'Домик Замок',
+  },
+  {
+    name: 'Дмитрий К.',
+    city: 'Санкт-Петербург',
+    text: 'Купил «Ракету» и «Маяк» двум дочкам. Качество картона отличное, всё собирается без клея. Очень понравилось, что можно раскрашивать на свой вкус.',
+    rating: 5,
+    product: 'Домик Ракета',
+  },
+  {
+    name: 'Елена В.',
+    city: 'Екатеринбург',
+    text: 'Искала подарок племяннику — нашла «Лесной домик». Доставка за 4 дня в Екатеринбург, упаковка аккуратная. Ребёнок собрал сам за полчаса!',
+    rating: 5,
+    product: 'Домик Лесной',
+  },
+  {
+    name: 'Ольга С.',
+    city: 'Новосибирск',
+    text: 'Заказали «Ферму» на день рождения. Дети были заняты весь вечер — сборка и раскрашивание. Экологичный и безопасный материал, рекомендую.',
+    rating: 4,
+    product: 'Домик Ферма',
+  },
+];
+
+function starsSvg(count: number): string {
+  return Array.from({ length: 5 }, (_, i) =>
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="${i < count ? '#FFD23F' : '#E0D8CC'}" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/></svg>`
+  ).join('');
+}
+---
+
+<section id="reviews" class="section reviews-section">
+  <div class="container">
+    <h2 class="section-title animate-on-scroll">Что говорят <span>покупатели</span></h2>
+
+    <div class="reviews-grid">
+      {reviews.map((review, index) => (
+        <article
+          class="review-card animate-on-scroll"
+          style={`transition-delay: ${index * 0.1}s`}
+        >
+          <div class="review-stars" set:html={starsSvg(review.rating)} />
+          <p class="review-text">{review.text}</p>
+          <div class="review-footer">
+            <div class="review-avatar" aria-hidden="true">
+              {review.name.charAt(0)}
+            </div>
+            <div class="review-info">
+              <span class="review-name">{review.name}</span>
+              <span class="review-meta">{review.city} · {review.product}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    background: var(--color-bg-alt);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  /* ===== Card ===== */
+  .review-card {
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ===== Stars ===== */
+  .review-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  /* ===== Text ===== */
+  .review-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-text-light);
+    flex: 1;
+    margin: 0;
+  }
+
+  /* ===== Footer ===== */
+  .review-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .review-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  .review-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 768px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .review-card {
+      padding: 22px 18px;
+    }
+  }
+</style>

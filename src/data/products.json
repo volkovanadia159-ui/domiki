@@ -1,0 +1,62 @@
+[
+  {
+    "id": "forest",
+    "name": "Домик Лесной",
+    "price": 1490,
+    "description": "Уютный домик лесника с деревьями и животными. Развивает воображение и любовь к природе.",
+    "sizes": "40 × 30 × 35 см",
+    "includes": "Домик, набор наклеек, инструкция",
+    "image": "/images/product-forest.svg",
+    "video360": "/videos/product-forest-360.mp4"
+  },
+  {
+    "id": "castle",
+    "name": "Домик Замок",
+    "price": 2490,
+    "description": "Величественный замок с башнями и подъёмным мостом. Для настоящих рыцарей и принцесс.",
+    "sizes": "50 × 40 × 45 см",
+    "includes": "Замок, фигурки, набор наклеек, инструкция",
+    "image": "/images/product-castle.svg",
+    "video360": "/videos/product-castle-360.mp4"
+  },
+  {
+    "id": "rocket",
+    "name": "Домик Ракета",
+    "price": 1990,
+    "description": "Космическая ракета для межгалактических путешествий. Три уровня для игры.",
+    "sizes": "30 × 30 × 55 см",
+    "includes": "Ракета, космонавт-наклейка, инструкция",
+    "image": "/images/product-rocket.svg",
+    "video360": "/videos/product-rocket-360.mp4"
+  },
+  {
+    "id": "lighthouse",
+    "name": "Домик Маяк",
+    "price": 1790,
+    "description": "Морской маяк с вращающимся фонарём. Приключения на берегу моря.",
+    "sizes": "25 × 25 × 50 см",
+    "includes": "Маяк, морские наклейки, инструкция",
+    "image": "/images/product-lighthouse.svg",
+    "video360": "/videos/product-lighthouse-360.mp4"
+  },
+  {
+    "id": "bakery",
+    "name": "Домик Пекарня",
+    "price": 1690,
+    "description": "Пекарня с витриной и печью. В комплекте — картонные пирожные и хлеб.",
+    "sizes": "35 × 30 × 30 см",
+    "includes": "Пекарня, набор выпечки, наклейки, инструкция",
+    "image": "/images/product-bakery.svg",
+    "video360": "/videos/product-bakery-360.mp4"
+  },
+  {
+    "id": "farm",
+    "name": "Домик Ферма",
+    "price": 2990,
+    "description": "Большая ферма с загоном, амбаром и животными. Самый большой набор в коллекции.",
+    "sizes": "60 × 40 × 35 см",
+    "includes": "Ферма, амбар, забор, животные, наклейки, инструкция",
+    "image": "/images/product-farm.svg",
+    "video360": "/videos/product-farm-360.mp4"
+  }
+]
